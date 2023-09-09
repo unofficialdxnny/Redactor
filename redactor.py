@@ -14,14 +14,8 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
 for (x, y, w, h) in faces:
-    # Extract the face ROI (Region of Interest)
     face_roi = image[y:y + h, x:x + w]
-
-    # Apply a Gaussian blur to the face ROI
     blurred_face = cv2.GaussianBlur(face_roi, (99, 99), 30)
-
-    # Replace the original face region with the blurred face
     image[y:y + h, x:x + w] = blurred_face
-
 
 cv2.imwrite('blurred_image.jpg', image)
